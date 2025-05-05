@@ -1,25 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react';
 
+function Greeting({ person }) {
+  const [greet, setGreet] = useState('');
 
+  useEffect(() => {
+    if (person.firstTime) {
+      setGreet('Привет, ');
+    } else {
+      setGreet('Привет, у тебя поменялось имя, теперь ты ');
+    }
+  }, [person]);
 
-function Greeting(props) {
-    const [message, setMessage] = useState(`Привет, ${props.person}!`);
-    const [name, setName] = useState(props.person)
-    useEffect(()=>{
-       if(props.person !== name){
-        setMessage(`Привет, у тебя поменялось имя, теперь ты ${props.person}!`);
-       } else {console.log('Имя не изменилось')}
-    },[props.person, name])
-
-
-    return (
-        <>
-        <div>
-            {message}
-        </div>
-        </>
-    )
-
+  return (
+    <div>
+      {greet}
+      {person.name}!
+    </div>
+  );
 }
 
-export default Greeting
+export default Greeting;

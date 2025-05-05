@@ -13,7 +13,7 @@ function Clock() {
     const minutes = Math.trunc(time / 60) % 60
     const seconds = time % 60
     const isVisisble = minutes !== 0 && minutes % 5 === 0;
-    const message = (<div>'Время делится на 5'</div>)
+    const message = (<div>Время делится на 5</div>)
 
     return (
         <>

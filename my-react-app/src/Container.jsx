@@ -1,26 +1,37 @@
-import { useState, useEffect, useLayoutEffect } from 'react'
-import './Container.css'
+import { useState, useEffect } from 'react';
+import './Container.css';
 import { faker } from '@faker-js/faker';
 import Greeting from './components/Greeting';
 import Clock from './components/Clock';
-import Header from './components/Header/inde';
+import Header from './components/Header/index'; // Исправлено опечатка в пути
 
 function Container() {
-  const [name, setName] = useState(`${faker.person.firstName()}`)
+  const [person, setPerson] = useState({
+    name: faker.person.firstName(),
+    firstTime: true,
+  });
 
   useEffect(() => {
-    setInterval(() => setName(faker.person.firstName()), 2000);
-  }, [])
+    const timerID = setInterval(() => {
+      setPerson(prevPerson => ({
+        ...prevPerson,
+        name: faker.person.firstName(),
+        firstTime: false,
+      }));
+    }, 2000);
 
-
+    return () => {
+      clearInterval(timerID);
+    };
+  }, []);
 
   return (
     <>
-    <Header />
+      <Header />
       <Clock />
-      <Greeting person={name} />
+      <Greeting person={person} />
     </>
-  )
+  );
 }
 
-export default Container
+export default Container;
