@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 
-function Greeting({ person }) {
+function Greeting({person}) {
   const [greet, setGreet] = useState('');
+  const {name, firstTime} = person
 
   useEffect(() => {
-    if (person.firstTime) {
+    console.log(person)
+    if (firstTime) {
       setGreet('Привет, ');
     } else {
       setGreet('Привет, у тебя поменялось имя, теперь ты ');
@@ -14,7 +16,7 @@ function Greeting({ person }) {
   return (
     <div>
       {greet}
-      {person.name}!
+      {name}!
     </div>
   );
 }
